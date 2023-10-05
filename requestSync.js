@@ -7,7 +7,7 @@ function requestSync(url) {
     const end = Date.now();
     const executionTime = end - start;
     console.log(`Execution time: ${executionTime}ms`);
-}
+} 
 
 const totalStart = Date.now();
 requestSync(url);
