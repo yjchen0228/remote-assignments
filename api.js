@@ -67,13 +67,12 @@ app.post('/users', async (req, res) => {
             return res.status(409).json({ error: 'Email already exists' });
         }
         const userId = Math.floor(Math.random() * 1000000);
-        const currentDateTimeMySQLFormat = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+        // Convert RFC2616 date to MySQL datetime format
+        const requestDateMySQLFormat = new Date(requestDate).toISOString().slice(0, 19).replace('T', ' ');
 
         // Insert user into database
-        const [result] = await db.promise().query('INSERT INTO user (id, name, email, password, created_at) VALUES (?, ?, ?, ?, ?)', [userId, name, email, password, currentDateTimeMySQLFormat]);
-
-        // Get the current date and time in the "Tue, 10 Jan 2023 00:43:21 GMT" format for the response
-        const currentDateTimeResponseFormat = new Date().toUTCString();
+        const [result] = await db.promise().query('INSERT INTO user (id, name, email, password, created_at) VALUES (?, ?, ?, ?, ?)', [userId, name, email, password, requestDateMySQLFormat]);
 
         // Return success response
         res.status(200).json({
@@ -83,7 +82,7 @@ app.post('/users', async (req, res) => {
                     name,
                     email
                 },
-                "request-date": currentDateTimeResponseFormat
+                "request-date": requestDate
             }
         });
     } catch (err) {
