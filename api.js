@@ -114,7 +114,7 @@ app.get('/users', async (req, res) => {
                     name: user.name,
                     email: user.email
                 },
-                "request-date": user.created_at
+                "request-date": requestDate
             }
         });
     } catch (err) {
