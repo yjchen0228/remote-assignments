@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { postData } from './getPostData';
 
 const LikeButton = styled.button`
-  background-color: ${(props) => (props.isLiked ? 'red' : 'gray')};
+  background-color: gray;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -13,7 +14,7 @@ const LikeButton = styled.button`
 
 function ReactLikeButton() {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(postData.initialLikes);  // Initializing likes with mock data
 
   function handleLikeToggle() {
     if (isLiked) {
@@ -27,10 +28,10 @@ function ReactLikeButton() {
 
   return (
     <div>
-      <h1>React.js Sample</h1>
-      <p>Please click "Like" (withdraw "Like" by simply click it one more time).</p>
-      <LikeButton onClick={handleLikeToggle}>
-        Like ({likeCount})
+     <h1>{postData.title}</h1>
+      <p>{postData.content}</p>
+      <LikeButton isLiked={isLiked} onClick={handleLikeToggle}>
+        {isLiked ? 'Like' : 'Like'} ({likeCount})
       </LikeButton>
     </div>
   );
