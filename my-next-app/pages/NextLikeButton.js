@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-
+import { postData } from './getPostData';
 function NextLikeButton() {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(postData.initialLikes);
 
   function handleLikeToggle() {
     if (isLiked) {
