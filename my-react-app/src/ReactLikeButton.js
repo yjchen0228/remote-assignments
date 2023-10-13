@@ -30,8 +30,8 @@ function ReactLikeButton() {
     <div>
      <h1>{postData.title}</h1>
       <p>{postData.content}</p>
-      <LikeButton isLiked={isLiked} onClick={handleLikeToggle}>
-        {isLiked ? 'Like' : 'Like'} ({likeCount})
+      <LikeButton onClick={handleLikeToggle}>
+        Like ({likeCount})
       </LikeButton>
     </div>
   );
